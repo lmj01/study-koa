@@ -1,0 +1,87 @@
+<style>
+    .container {
+        margin: 70px auto 0;
+    }
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    #avator_val {
+        visibility: hidden;
+    }
+</style>
+<div class="container">
+    <div>
+        <h3>Register</h3>
+    </div>
+    <div>
+        <form action="/register" method="POST" enctype="multipart/form-data">
+        {{!-- <form action="/register" method="POST"> --}}
+            <input type="hidden" name="csrfmiddlewaretoken" value="">
+            <div>
+                <label for="id_nickname">Nickname</label>
+                <input id="id_nickname" type="text" name="nickname" required="">
+            </div>            
+            <div>
+                <label for="id_email">Email</label>
+                <input id="id_email" type="email" name="email" required="">
+            </div>            
+            <div>
+                <label for="id_password">Password</label>
+                <input id="id_password" type="password" name="password" required="">
+            </div>
+            <div>
+                <label for="id_password">Confirmation Password</label>
+                <input id="id_password" type="password" name="password2" required="">
+            </div>
+            <div>
+                <label for="id_avator">Avator</label>
+                <input type="file" name="avator" id="id_avator">
+                <input type="file" name="avator" id="avator_val">
+                <img class="preview" alt="preview avator">
+            </div>
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+</div>
+<script>
+    $('#id_avator').change(function(){
+        if (this.files.length != 0) {
+            let file = this.files[0],
+                reader = new FileReader();
+            if (!reader) {
+                this.value = '';
+                return;
+            }
+            //if (file.size >= 1024 * 1024 / 2) {
+            //    return;
+            //}
+            if (!/image/g.test(file.type)) {
+                alert('请上传图片!');
+                $('#avator_val').val('');
+                $('form .preview').attr('src', '');
+                $('form .preview').fadeOut();
+                return;
+            }
+            this.setAttribute('type', 'hidden');
+            reader.onload = function(e) {
+                this.value = '';
+                $('form .preview').attr('src', e.target.result);
+                $('form .preview').fadeIn();
+                let img = new Image();
+                img.onload = function() {
+                    let canvas = document.createElement('canvas');
+                    let ctx = canvas.getContext('2d');
+                    canvas.width = 100;
+                    canvas.height = 100;
+                    ctx.clearRect(0, 0, 100, 100);
+                    ctx.drawImage(img, 0, 0, 100, 100);
+                    let blob = canvas.toDataURL('image/png');
+                    $('#avator_val').val(blob);
+                }
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    })
+</script>

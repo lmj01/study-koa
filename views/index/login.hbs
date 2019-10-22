@@ -1,0 +1,27 @@
+<style>
+    .container {
+        min-height: 100%;
+        position: relative;
+        width: 100%;
+        margin: 70px auto 0;
+    }
+</style>
+<div class="container">
+    <div>
+        <h3>Login</h3>
+    </div>
+    <div>
+        <form action="/login" method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="">
+            <div>
+                <label for="id_email">Email</label>
+                <input id="id_email" type="email" name="email" required="">
+            </div>
+            <div>
+                <label for="id_password">Password</label>
+                <input id="id_password" type="password" name="password" required="">
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>

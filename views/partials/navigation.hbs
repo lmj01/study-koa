@@ -1,0 +1,71 @@
+<style>
+    nav {        
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 70px;
+    }
+    nav a {
+        height: 50px;
+        display: inline-block;
+        line-height: inherit;
+        white-space: nowrap;
+        font-size: 1.25rem;
+    }
+    nav a img {
+        max-width: 100%;
+        max-height: 1.5rem;
+    }
+    nav ul {
+        display: flex;
+        flex-direction: row;        
+        list-style: none;
+    }
+    nav ul li {
+        margin-right: 10px;
+        border-style: none;
+    }
+    nav > div {
+        flex-grow: 1 !important;
+        align-items: center;
+    }
+
+</style>
+<nav>
+    <a href="/">
+        <img src="/images/WebCeph_logo.png">
+    </a>
+    <div>
+        <ul>
+            <li>GUIDE</li>
+            <li>PRICING</li>
+            <li>ABOUT</li>
+        </ul>
+    </div>
+    <div>
+        <ul>
+            <form>
+                <input type="hidden" name="csrfmiddlewaretoken" value="">
+                <div>
+                    <div>
+                        <input type="hidden" name="next" value="">
+                        <input type="hidden" name="language" value="">
+                        <li>
+                            <a href="#"><span>English</span></a>                            
+                        </li>
+                        <div style="display: none;">
+                            <a href="#"><span>English</span></a>
+                            <a href="#"><span>中文</span></a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <a href="/en/login">Login in</a>
+            <a href="/en/register">Sign up</a>
+        </ul>
+    </div>
+</nav>

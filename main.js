@@ -1,12 +1,12 @@
 
 const Koa = require('koa');
 const path = require('path');
-const bodyParser = require('koa-bodyparser');
+const bodyParser = require('koa-body');
 const session = require('koa-session-minimal');
 const mysqlStore = require('koa-mysql-session');
-const router = require('koa-router');
-const views = require('koa-views');
 const staticCache = require('koa-static');
+
+const logger = require('./middlewares/logger');
 const config = require('./config/default');
 
 const app = new Koa();
@@ -34,31 +34,22 @@ app.use(staticCache(path.join(__dirname, './images'), {
 	maxAge: 365 * 24 * 60 * 60
 }));
 
-app.use(views(path.join(__dirname, './views'), {
-
-}));
-
+app.use(require('./middlewares/render'));
 app.use(bodyParser({
-	formLimit: '1mb'
+	formidable: {},
+	requestBody: 'body',
+	requestFiles: 'files'
 }));
-
 app.use(async (ctx, next) => {
 	await next();
 	const rt = ctx.response.get('X-Response-Time');
-	console.log(`${ctx.method} ${ctx.url} - ${rt}`);
+	logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
-app.use(require('./routers/signup.js').routes());
-
-app.use(async (ctx, next) => {
-	const start = Date.now();
-	await next();
-	const ms = Date.now() - start;
-	ctx.set('X-Response-Time', `${ms}ms`);
-});
-
-app.use(async ctx => {
-	ctx.body = 'hello world!';
-});
+app.use(require('./routers/root').routes());
+app.use(require('./routers/authentication').routes());
+app.on('error', err=>{
+	logger.error('server error', err);	
+})
 
 app.listen(config.port);
