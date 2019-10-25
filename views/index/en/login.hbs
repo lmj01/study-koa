@@ -5,13 +5,17 @@
         width: 100%;
         margin: 70px auto 0;
     }
+    #id_iframe {
+        visibility: hidden;
+        display: none;
+    }
 </style>
 <div class="container">
     <div>
         <h3>Login</h3>
     </div>
     <div>
-        <form action="/login" method="POST">
+        <form action="/login" method="POST" target="tmpIFrame">
             <input type="hidden" name="csrfmiddlewaretoken" value="">
             <div>
                 <label for="id_email">Email</label>
@@ -23,5 +27,22 @@
             </div>
             <input type="submit" value="Login">
         </form>
+        <iframe name="tmpIFrame" id="id_iframe" src="" width="0" height="0"></iframe>
     </div>
 </div>
+<script>
+    let iframe = document.getElementById('id_iframe');
+    iframe.onload = function(e){
+        let text = window.frames[0].document.body.innerText;
+        if (text) {
+            let res = JSON.parse(text);
+            console.log(res);
+            if (res.code > 0) {
+                alert(res.message);
+            } else {
+                window.location.href = 'login';
+                //window.location.reload();
+            }
+        }
+    }
+</script>

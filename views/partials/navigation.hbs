@@ -64,8 +64,29 @@
                     </div>
                 </div>
             </form>
-            <a href="/en/login">Login in</a>
+            {{#if session.nickname}}
+            <a href="/en/login">{{session.nickname}}</a>            
+            <a href="/en/register" onclick="logout()" target="_black">Logout</a>
+            {{else}}
+            <a href="/en/login">Log in</a>
             <a href="/en/register">Sign up</a>
+            {{/if}}
         </ul>
     </div>
 </nav>
+<script>
+    function logout() {
+        if (window.confirm('are you sure to logout?')) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/logout');
+            xhr.onreadystatechange = function() {
+                //if (this.readyState == 4 && this.status == 200) {
+                    //window.location.href = '/';
+                //}
+                alert(this.status);
+            }
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send();            
+        }        
+    }
+</script>

@@ -17,8 +17,7 @@ app.use(session({
 		user: config.mysql.user,
 		password: config.mysql.password,
 		database: config.mysql.database,
-		host: config.mysql.host,
-		port: config.mysql.port
+		host: config.mysql.host
 	})
 }));
 
@@ -33,17 +32,19 @@ app.use(staticCache(path.join(__dirname, './images'), {
 }, {
 	maxAge: 365 * 24 * 60 * 60
 }));
-
-app.use(require('./middlewares/render'));
 app.use(bodyParser({
-	formidable: {},
+	formidable: {
+		uploadDir:'./uploadfiles'
+	},
 	requestBody: 'body',
-	requestFiles: 'files'
+	requestFiles: 'files',
+	multipart: true
 }));
+app.use(require('./middlewares/render'));
 app.use(async (ctx, next) => {
 	await next();
 	const rt = ctx.response.get('X-Response-Time');
-	logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
+	//logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
 app.use(require('./routers/root').routes());
