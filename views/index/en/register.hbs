@@ -55,12 +55,11 @@
         console.log(text);
         if (text) {
             let res = JSON.parse(text);
-            console.log(res);
             if (res.code > 0) {
                 alert(res.message);
-            } else {
+            } else if (res.code == 0) {
                 alert(res.message);
-                window.location.href = 'login';
+                window.location.href = '/en/login';
             }
         }
     }

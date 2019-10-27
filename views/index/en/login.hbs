@@ -36,12 +36,10 @@
         let text = window.frames[0].document.body.innerText;
         if (text) {
             let res = JSON.parse(text);
-            console.log(res);
             if (res.code > 0) {
                 alert(res.message);
-            } else {
-                window.location.href = 'login';
-                //window.location.reload();
+            } else if(res.code == 0) {
+                window.location.href = '/';
             }
         }
     }

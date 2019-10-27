@@ -18,7 +18,13 @@ app.use(session({
 		password: config.mysql.password,
 		database: config.mysql.database,
 		host: config.mysql.host
-	})
+	}),
+	cookie: {
+		domain: 'localhost',
+		maxAge: 1000 * 30,
+		httpOnly: true,
+		overwrite: false
+	}
 }));
 
 app.use(staticCache(path.join(__dirname, './public'), {
@@ -45,12 +51,13 @@ app.use(async (ctx, next) => {
 	await next();
 	const rt = ctx.response.get('X-Response-Time');
 	//logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
+	console.log(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
 app.use(require('./routers/root').routes());
 app.use(require('./routers/authentication').routes());
-app.on('error', err=>{
-	logger.error('server error', err);	
-})
+// app.on('error', err=>{
+// 	logger.error('server error', err);		
+// })
 
 app.listen(config.port);
