@@ -39,7 +39,9 @@
             if (res.code > 0) {
                 alert(res.message);
             } else if(res.code == 0) {
-                window.location.href = '/';
+                setTimeout(()=>{
+                    window.location.href = '/';
+                }, 100);                
             }
         }
     }

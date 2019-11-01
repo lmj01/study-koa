@@ -10,11 +10,11 @@
         height: 70px;
     }
     nav a {
-        height: 50px;
         display: inline-block;
         line-height: inherit;
         white-space: nowrap;
         font-size: 1.25rem;
+        flex-grow: 1;
     }
     nav a img {
         max-width: 100%;
@@ -24,14 +24,18 @@
         display: flex;
         flex-direction: row;        
         list-style: none;
+        margin: auto;
     }
     nav ul li {
         margin-right: 10px;
         border-style: none;
     }
     nav > div {
-        flex-grow: 1 !important;
-        align-items: center;
+        flex-grow: 5;
+        margin: auto 0;
+    }
+    ul.state {
+        justify-content: end;
     }
     .div_language {
         position: relative;
@@ -56,7 +60,8 @@
         </ul>
     </div>
     <div>
-        <ul>
+        <ul class="state">
+            <li>
             <form>
                 <input type="hidden" name="csrfmiddlewaretoken" value="">
                 <div>
@@ -73,12 +78,13 @@
                     </div>
                 </div>
             </form>
+            </li>
             {{#if session.nickname }}
-            <span> {{session.nickname}} </span>
-            <span onclick="logout()"> logout </span>
+            <li><span> {{session.nickname}} </span></li>
+            <li><span onclick="logout()"> logout </span></li>
             {{else}}
-            <a href="/en/login">Log in</a>
-            <a href="/en/register">Sign up</a>
+            <li><a href="/en/login">Log in</a></li>
+            <li><a href="/en/register">Sign up</a></li>
             {{/if}}
         </ul>
     </div>

@@ -6,33 +6,29 @@ const moment = require('moment');
 const uuidv1 = require('uuid/v1');
 
 
-router.get('/en/register', async (ctx, next) => {    
+router.get('/en/register', async ctx => {    
     await ctx.render('index/en/register', {
         title: 'Register',
         session: ctx.session
     });
-    next();
 });
 
-router.get('/en/login', async (ctx, next) => {    
+router.get('/en/login', async ctx => {       
     await ctx.render('index/en/login', {
         title: 'Login',
         session: ctx.session
     });
-    next();
 });
 
-router.post('/logout', async (ctx, next) => {
-    logger.info('logout ', new Date());
+router.post('/logout', async ctx => {
     ctx.session = null;
     await ctx.render('index/index', {
         title: 'Web-ceph',
         session: ctx.session
     });
-    next();
 });
 
-router.post('/login', async (ctx, next) => {
+router.post('/login', async ctx => {
     let { email, password } = ctx.request.body;
     await modelUser.user_find(email)
         .then(res=>{
@@ -56,19 +52,11 @@ router.post('/login', async (ctx, next) => {
             }
         }).catch(err=>{
             logger.error('login ',err);
-        })     
-    next(); 
+        })  
 });
 
-router.post('/register', async (ctx, next) => {
+router.post('/register', async ctx => {
     let { nickname, email, password, password2 } = ctx.request.body;
-    // if (!email || !password || !nickname || !password2) {
-    //     ctx.body = {
-    //         code: 3,
-    //         message: 'please fill thses text!'
-    //     }
-    //     return;
-    // }
     await modelUser.user_find(email)
         .then(async (result) => {
             logger.info(result);
@@ -95,7 +83,6 @@ router.post('/register', async (ctx, next) => {
         }).catch(err=>{
             logger.error('register ', err);
         });
-    next();
 });
 
 module.exports = router;

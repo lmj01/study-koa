@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "nodemon main.js",
+    "sass": "node helpers/sass.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,6 +37,7 @@
     "md5": "^2.2.1",
     "moment": "^2.24.0",
     "mysql": "^2.17.1",
+    "node-sass": "^4.13.0",
     "nodemon": "^1.19.4",
     "timeago.js": "^4.0.0",
     "uuid": "^3.3.3"

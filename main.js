@@ -6,7 +6,6 @@ const session = require('koa-session-minimal');
 const mysqlStore = require('koa-mysql-session');
 const staticCache = require('koa-static');
 
-const logger = require('./middlewares/logger');
 const config = require('./config/default');
 
 const app = new Koa();
@@ -50,14 +49,13 @@ app.use(require('./middlewares/render'));
 app.use(async (ctx, next) => {
 	await next();
 	const rt = ctx.response.get('X-Response-Time');
-	//logger.info(`${ctx.method} ${ctx.url} - ${rt}`);
 	console.log(`${ctx.method} ${ctx.url} - ${rt}`);
 });
 
 app.use(require('./routers/root').routes());
 app.use(require('./routers/authentication').routes());
-// app.on('error', err=>{
-// 	logger.error('server error', err);		
-// })
+app.on('error', err=>{
+	console.log('server error', err);		
+});
 
 app.listen(config.port);
