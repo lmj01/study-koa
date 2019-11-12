@@ -1,83 +1,54 @@
-<style>
-    nav {        
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 70px;
-    }
-    nav a {
-        display: inline-block;
-        line-height: inherit;
-        white-space: nowrap;
-        font-size: 1.25rem;
-        flex-grow: 1;
-    }
-    nav a img {
-        max-width: 100%;
-        max-height: 1.5rem;
-    }
-    nav ul {
-        display: flex;
-        flex-direction: row;        
-        list-style: none;
-        margin: auto;
-    }
-    nav ul li {
-        margin-right: 10px;
-        border-style: none;
-    }
-    nav > div {
-        flex-grow: 5;
-        margin: auto 0;
-    }
-    ul.state {
-        justify-content: end;
-    }
-    .div_language {
-        position: relative;
-    }
-    .id_language {
-        display: none;
-    }    
-    span,
-    a {
-        margin: auto 10px auto;
-    }
-</style>
 <nav>
     <a href="/">
         <img src="/images/WebCeph_logo.png">
     </a>
-    <div>
+    <div class="menu">
         <ul>
-            <li>GUIDE</li>
-            <li>PRICING</li>
-            <li>ABOUT</li>
+            <li><a href="#">GUIDE</a></li>
+            <li><a href="#">Sub</a>
+                <ul>
+                    <li><a href="#">sub1</a></li>
+                    <li><a href="#">sub2</a></li>
+                    <li><a href="#">sub3</a></li>
+                </ul>
+            </li>
+            <li><a href="#">PRICING</a></li>
+            <li><a href="#">ABOUT</a></li>
         </ul>
     </div>
-    <div>
-        <ul class="state">
+    <div class="state">
+        <ul>
             <li>
-            <form>
-                <input type="hidden" name="csrfmiddlewaretoken" value="">
-                <div>
-                    <div class="div_language">
+                <div class="language_div">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="">
+                    <div>
                         <input type="hidden" name="next" value="">
                         <input type="hidden" name="language" value="">
-                        <li>
-                            <a href="#"><span>English</span></a>                            
-                        </li>
-                        <div class="id_language">
-                            <a href="#"><span>English</span></a>
-                            <a href="#"><span>中文</span></a>
+                        <div class="language_cur">
+                            <a href="#"><span>English</span></a>                                                        
+                        </div>
+                        <div class="language_other">
+                            <div>
+                                <a href=""><span>English</span></a>
+                                <a href=""><span>中文</span></a>
+                                <a href=""><span>法文</span></a>
+                                <a href=""><span>俄语</span></a>
+                            </div>                            
                         </div>
                     </div>
                 </div>
-            </form>
+            </li>
+            <li>
+                <div class="parent">
+                    <a href="#">test</a>
+                    <div class="child">
+                        <span>span1</span>
+                        <span>span2</span>
+                        <span>span3</span>
+                        <a href="#">engline</a>
+                        <a href="#">中文</a>
+                    </div>
+                </div>
             </li>
             {{#if session.nickname }}
             <li><span> {{session.nickname}} </span></li>

@@ -31,7 +31,7 @@ function render(inpath, outpath) {
 
 try {
     //createFolder(root+'/sass/index');
-    render(root + '/sass/header.scss', root+'/public/css/header.min.css');
+    render(root + '/sass/index.scss', root+'/public/css/index.min.css');
 } catch(err) {
     console.log('node-sass parser css', err);
 }

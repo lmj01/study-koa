@@ -1,1 +1,170 @@
-body{padding:0;margin:0;width:100%;height:100%;background-color:lightblue}h1{text-align:center;width:100%}
+@charset "UTF-8";
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+}
+
+nav > a {
+  display: inline-block;
+  line-height: inherit;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  flex-grow: 1;
+  margin: auto 10px auto;
+}
+
+nav > a img {
+  max-width: 100%;
+  max-height: 1.5rem;
+}
+
+nav ul {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+nav ul > li {
+  margin-right: 10px;
+}
+
+nav > div {
+  flex-grow: 5;
+  margin: auto 0;
+}
+
+nav div.state ul {
+  justify-content: end;
+}
+
+nav div.state span,
+nav div.state a {
+  margin: auto 10px auto;
+}
+
+div.menu ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+
+div.menu ul li {
+  display: inline-block;
+  z-index: 500;
+}
+
+div.menu a {
+  display: block;
+  color: #FFF;
+  font-size: 20px;
+  line-height: 1.5rem;
+  text-decoration: none;
+}
+
+div.menu a:hover {
+  background-color: #333;
+}
+
+div.menu ul ul {
+  display: none;
+  position: absolute;
+  top: 1.5rem;
+}
+
+div.menu ul li:hover > ul {
+  display: inherit;
+}
+
+div.menu ul ul li {
+  width: 230px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+
+div.menu ul ul ul li {
+  position: relative;
+  top: -1.5rem;
+  left: 230px;
+}
+
+div.menu ul ul li {
+  border: 1px solid white;
+}
+
+div.menu li > a:after {
+  content: ' ▼';
+}
+
+div.menu li > a:only-child:after {
+  content: '';
+}
+
+.language_other {
+  position: absolute;
+  display: none;
+  z-index: 50;
+  background-color: lightgreen;
+}
+
+.language_other > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.language_other > div > a {
+  margin: 30px;
+}
+
+.language_div {
+  display: inline-block;
+}
+
+.language_div:hover .language_other {
+  display: flex;
+  background-color: lightsalmon;
+  border: 1px solid red;
+}
+
+.child {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  background-color: lightgray;
+}
+
+.parent {
+  display: inline-block;
+  background-color: lightgreen;
+}
+
+.parent:hover .child {
+  display: flex;
+  background-color: lightsalmon;
+  cursor: pointer;
+}
+
+footer {
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid #323203;
+}
