@@ -16,6 +16,7 @@ nav {
   left: 0;
   right: 0;
   height: 70px;
+  z-index: 30;
 }
 
 nav > a {
